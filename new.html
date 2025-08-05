@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semaphore & Morse Code Recognition</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .section {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    input, textarea, select, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Semaphore & Morse Code Recognition Tool</h1>
+  </header>
+
+  <div class="section">
+    <h2>Semaphore Recognition</h2>
+    <p>This tool uses your webcam to recognize semaphore flag positions and convert them into English letters.</p>
+    <p><strong>To use:</strong> Run the Python script that uses OpenCV and MediaPipe for live webcam detection.</p>
+    <pre><code>python semaphore_recognizer.py</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>Morse Code Encoder/Decoder</h2>
+    <label for="morseInput">Enter text or Morse code:</label>
+    <textarea id="morseInput" rows="4"></textarea>
+
+    <button onclick="encodeMorse()">Encode to Morse</button>
+    <button onclick="decodeMorse()">Decode Morse</button>
+
+    <h3>Result:</h3>
+    <div id="morseResult" style="background:#eee; padding: 10px; min-height: 40px;"></div>
+  </div>
+
+  <script>
+    const morseDict = {
+      'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+      'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+      'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+      'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+      'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--',
+      '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..',
+      '9': '----.', '0': '-----', ' ': '/'
+    };
+    const reverseMorseDict = Object.fromEntries(Object.entries(morseDict).map(([k, v]) => [v, k]));
+
+    function encodeMorse() {
+      const input = document.getElementById('morseInput').value.toUpperCase();
+      const encoded = input.split('').map(c => morseDict[c] || '?').join(' ');
+      document.getElementById('morseResult').innerText = encoded;
+    }
+
+    function decodeMorse() {
+      const input = document.getElementById('morseInput').value.trim();
+      const decoded = input.split(' ').map(c => reverseMorseDict[c] || '?').join('');
+      document.getElementById('morseResult').innerText = decoded;
+    }
+  </script>
+</body>
+</html>
