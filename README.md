@@ -11,6 +11,3 @@ This tool demonstrates both **command-line utilities** (Python) and a **browser-
 - 🚩 **Semaphore Recognition (conceptual)** using Python (with webcam + OpenCV/MediaPipe – placeholder for extension)
 - 🎨 Clean and simple UI for browser usage
 
----
-
-## 📂 Project Structure
